@@ -1,0 +1,4 @@
+# Runtime dependencies (pinned). Add security libs (argon2-cffi, cryptography, ...) once architecture.md is settled.
+fastapi==0.165.0
+uvicorn[standard]==0.54.0
+SQLAlchemy==2.1.9
