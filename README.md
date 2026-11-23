@@ -3,7 +3,7 @@
 A password manager for CSC 327 (Secure Software Development), Group 5 "Team Iron".
 Each user signs in with an account password, then unlocks their vault with a separate master key. Saved credentials are encrypted at rest (Argon2id + AES-256-GCM), so a stolen database file is unreadable without the master key.
 
-> **Status:** complete. Sign up with email verification, an encrypted vault, a vault-health dashboard, import/export, an activity log, and recovery flows. All planned security demos have tests (section 6).
+> **Status:** backend import in progress. The frontend and backend logic are present, but the backend cannot start until the missing `backend/app/models/` package and the `utcnow` and `iso` helpers in `backend/app/db.py` are supplied. The security-demo tests (section 6) and database demo scripts (section 9) are also missing from this handoff; those commands are not available yet.
 
 | Layer    | Tech                                                         |
 | -------- | ------------------------------------------------------------ |
