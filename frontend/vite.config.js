@@ -8,7 +8,7 @@ export default defineConfig({
 	server: {
 		// Proxy API calls to FastAPI so the browser sees a single origin in dev.
 		proxy: {
-			"/api": "http://127.0.0.1:8000",
+			"/api": process.env.API_TARGET ?? "http://127.0.0.1:8000",
 		},
 	},
 });

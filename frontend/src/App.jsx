@@ -1,22 +1,43 @@
-import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router";
+import UnlockModal from "./components/UnlockModal.jsx";
+import AppShell from "./layouts/AppShell.jsx";
+import AuthLayout from "./layouts/AuthLayout.jsx";
+import Activity from "./pages/Activity.jsx";
+import ComingSoon from "./pages/ComingSoon.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import Login from "./pages/Login.jsx";
+import Passwords from "./pages/Passwords.jsx";
+import RecoverMasterKey from "./pages/RecoverMasterKey.jsx";
+import ResetVault from "./pages/ResetVault.jsx";
+import Settings from "./pages/Settings.jsx";
+import Signup from "./pages/Signup.jsx";
+import Transfer from "./pages/Transfer.jsx";
 
-// Placeholder page: confirms the frontend can reach the backend through the Vite proxy.
+// Route table. Visitors may open "/" only; AppShell redirects everything else to /login?next=.
 export default function App() {
-	const [status, setStatus] = useState("checking…");
-
-	useEffect(() => {
-		fetch("/api/health")
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.then((data) => setStatus(`api: ${data.status}, db: ${data.db}`))
-			.catch(() => setStatus("backend unreachable"));
-	}, []);
-
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-slate-900 text-slate-100">
-			<h1 className="text-4xl font-bold">VaultGuard</h1>
-			<p className="rounded bg-slate-800 px-4 py-2 font-mono text-sm">
-				{status}
-			</p>
-		</main>
+		<>
+			<Routes>
+				<Route element={<AppShell />}>
+					<Route index element={<Dashboard />} />
+					<Route path="passwords" element={<Passwords />} />
+					<Route path="transfer" element={<Transfer />} />
+					<Route path="activity" element={<Activity />} />
+					<Route path="settings" element={<Settings />} />
+				</Route>
+				<Route element={<AuthLayout guestOnly />}>
+					<Route path="forgot-password" element={<ForgotPassword />} />
+				</Route>
+				<Route element={<AuthLayout />}>
+					<Route path="login" element={<Login />} />
+					<Route path="signup" element={<Signup />} />
+					<Route path="recover-master-key" element={<RecoverMasterKey />} />
+					<Route path="reset-vault" element={<ResetVault />} />
+				</Route>
+				<Route path="*" element={<ComingSoon title="Page not found" />} />
+			</Routes>
+			<UnlockModal />
+		</>
 	);
 }
