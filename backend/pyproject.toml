@@ -10,7 +10,8 @@ extend-exclude = [".venv", "data"]
 select = ["E", "F", "I", "B", "UP", "S"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101"]  # assert is how pytest works
+"tests/**" = ["S101", "S105", "S106", "E501"]  # assert is pytest; passwords here are fictional
+"scripts/**" = ["I001", "E402", "E501", "S105"]  # scripts load .env before importing app; demo data is fictional
 
 [tool.bandit]
 exclude_dirs = ["tests", ".venv"]
