@@ -2,6 +2,7 @@
 docs/
 /CLAUDE.md
 .claude/
+skills-lock.json
 .playwright-mcp/
 
 # --- Secrets: never commit real env files ---
@@ -18,6 +19,12 @@ __pycache__/
 .coverage
 htmlcov/
 
+# --- Files the app itself downloads: never commit (they hold key material or ciphertext) ---
+vaultguard-backup-*.json
+vaultguard-recovery-key-*.txt
+*.pem
+*.key
+
 # --- Database files (contain vault data) ---
 *.db
 *.db-journal
@@ -31,9 +38,25 @@ backend/data/
 node_modules/
 dist/
 
+# --- Tool caches and build leftovers ---
+.mypy_cache/
+.vite/
+coverage/
+*.tsbuildinfo
+vite.config.js.timestamp-*
+
+# --- Scratch / test leftovers (browser checks, screenshots, temp files) ---
+/e2e-*
+/*.png
+*.tmp
+*.bak
+*.orig
+*.swp
+
 # --- Editors / OS / logs ---
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+desktop.ini
 *.log
